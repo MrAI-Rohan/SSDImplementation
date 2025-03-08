@@ -37,8 +37,10 @@ class SSDFeatureExtractor(nn.Module):
 
         self.model.features[maxpool3_pos].ceil_mode = True
 
+        # Layers till conv4_3
         self.conv4_3 = self.model.features[:maxpool4_pos]
 
+        # Layers till conv7
         self.conv7 = nn.Sequential(
                         *self.model.features[maxpool4_pos:-1],
                         nn.MaxPool2d(kernel_size=3, stride=1, padding=1),
