@@ -29,7 +29,7 @@ class SSDFeatureExtractor(nn.Module):
     def __init__(self):
         super().__init__()
 
-        self.model = torchvision.models.vgg16(weights=torchvision.models.VGG16_Weights)
+        self.model = torchvision.models.vgg16(weights=torchvision.models.VGG16_Weights.DEFAULT)
 
         _, _, maxpool3_pos, maxpool4_pos, _ = (i for i, layer in
                                                 enumerate(self.model.features) 
@@ -97,5 +97,3 @@ class SSDFeatureExtractor(nn.Module):
         layer_names = ["conv4_3", "conv7"] + [f"conv{i+8}_2" for i in range(len(self.extra))]
 
         return OrderedDict(zip(layer_names, outputs))
-
-
