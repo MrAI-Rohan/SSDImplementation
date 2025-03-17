@@ -48,7 +48,6 @@ class SSDFeatureExtractor(nn.Module):
                                     padding=6, dilation=6),
                         ConvBlock(in_channels=1024, out_channels=1024, kernel_size=1),
                     )
-        self.scale_weight = nn.Parameter(torch.ones((1, 512, 1, 1))) * 20
 
 
         self.extra = nn.ModuleList([

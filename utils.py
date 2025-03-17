@@ -1,6 +1,5 @@
 import torch
 
-
 def transform_cwh_to_xyxy(bboxes, image_size=300, denorm=False):
     """This functin expects a 2D input, even if one bbox to be transformed."""
     cx, cy, w, h = bboxes.T

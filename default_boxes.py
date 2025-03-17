@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 
-
 class SSDDefaultBoxes(nn.Module):
     """
     Stores default boxes and metadata related to them.

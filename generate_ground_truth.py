@@ -87,10 +87,7 @@ class GenerateGroundTruth(nn.Module):
             offsets = torch.zeros((8732, 4), device=self.device)
             new_labels = torch.zeros(8732, dtype=torch.int64, device=self.device)
 
-            split_offsets = torch.split(offsets, self.n_dbox_per_map.tolist())
-            split_labels = torch.split(new_labels, self.n_dbox_per_map.tolist())
-
-            return split_offsets, split_labels
+            return img, offsets, new_labels
 
         dboxes_xyxy = transform_cwh_to_xyxy(self.dboxes.dboxes, denorm=True)
         bboxes_cwh = transform_xyxy_to_cwh(bboxes, norm=True)
@@ -105,11 +102,7 @@ class GenerateGroundTruth(nn.Module):
         new_labels = torch.zeros(8732, dtype=torch.int64, device=self.device)
         new_labels[not_bg_mask] = labels[matched_labels[not_bg_mask]]
 
-        # Split offsets and labels feature map wise.
-        split_offsets = torch.split(offsets, self.n_dbox_per_map.tolist())
-        split_labels = torch.split(new_labels, self.n_dbox_per_map.tolist())
-
-        return split_offsets, split_labels
+        return img, offsets, new_labels
 
     def to(self, device):
         """Override to() for proper device handling."""
