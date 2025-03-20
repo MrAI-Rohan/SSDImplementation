@@ -29,7 +29,12 @@ class SSDFeatureExtractor(nn.Module):
     def __init__(self):
         super().__init__()
 
+        self.scale_weight = nn.Parameter(torch.ones((1, 512, 1, 1)) * 20)
+
         self.model = torchvision.models.vgg16(weights=torchvision.models.VGG16_Weights.DEFAULT)
+
+        # Classifier isn't needed in SSD
+        self.model.classifier = None
 
         _, _, maxpool3_pos, maxpool4_pos, _ = (i for i, layer in
                                                 enumerate(self.model.features) 
