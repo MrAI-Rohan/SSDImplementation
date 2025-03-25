@@ -1,3 +1,6 @@
+import torch
+import torch.nn as nn
+
 class SSDDetectionHead(nn.Module):
     """Defines the conv layers responsible for predicting box offsets and class scores."""
 
@@ -24,7 +27,7 @@ class SSDDetectionHead(nn.Module):
         """
         Takes in feature maps extracted from VGG Feature Extractor and predicts offsets
         and class scores of the default boxes.
-        
+
         Output dim: ((B, 8732, 4), (B, 8732, n_classes))
         """
 
